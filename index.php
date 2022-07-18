@@ -66,51 +66,7 @@ include( 'admin/includes/functions.php' );
 
     <hr>
 
-  <?php endwhile; ?>
-
-  <h2>Skills</h2>
-
-  <?php
-
-  $query = 'SELECT *
-    FROM skills
-    ORDER BY percent DESC';
-  $result = mysqli_query( $connect, $query );
-
-  ?>
-
-<?php while($record = mysqli_fetch_assoc($result)): ?>
-
-  <h4><?php echo $record['title']; ?></h4>
-
-  <img src="<?php echo $record['photo']; ?>" width="50">
-
-  <div style="width: 50%; background-color: #5e5e5e; height: 0.7rem; display: inline-block;">
-    <div style="width: <?php echo $record['percent']; ?>%; background-color: #78faf8; height: 0.7rem;"></div>
-  </div>
-  <small style="display: inline-block;"><?php echo $record['percent']; ?>%</small>
-
-<?php endwhile; ?>
-
-<h2>Education</h2>
-
-  <?php
-
-  $query = 'SELECT *
-    FROM education
-    ORDER BY startDate DESC';
-  $result = mysqli_query( $connect, $query );
-
-  ?>
-
-<?php while($record = mysqli_fetch_assoc($result)): ?>
-
-  <h4><?php echo $record['schoolName']; ?></h4>
-  <p><?php echo $record['program']; ?></p>
-  <small>From <?php echo $record['startDate']; ?> to </small>
-  <small><?php echo $record['endDate']; ?></small>
-
-<?php endwhile; ?>
+  <?php endwhile; ?>  
 
 </body>
 </html>
