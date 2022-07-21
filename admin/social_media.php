@@ -50,7 +50,7 @@ $result = mysqli_query($connect, $query);
                 <td align="left">
                     <?php echo htmlentities($record['title']); ?>
                 </td>
-                <td><?php echo $record['socialMediaLink']; ?>  </td>
+                <td><?php echo $record['link']; ?>  </td>
                 <td align="center"><a href="socialmedia_photo.php?id=<?php echo $record['id']; ?>">Photo</i></a></td>
                 <td align="center"><a href="socialmedia_edit.php?id=<?php echo $record['id']; ?>">Edit</i></a></td>
                 <td align="center">
