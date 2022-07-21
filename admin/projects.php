@@ -25,7 +25,7 @@ if( isset( $_GET['delete'] ) )
 
 $query = 'SELECT *
   FROM projects
-  ORDER BY date DESC';
+  ORDER BY title DESC';
 $result = mysqli_query( $connect, $query );
 
 ?>
@@ -37,8 +37,8 @@ $result = mysqli_query( $connect, $query );
     <th></th>
     <th align="center">ID</th>
     <th align="left">Title</th>
-    <th align="center">Type</th>
-    <th align="center">Date</th>
+    <th align="center">Description</th>
+    <th align="center">Used Skills</th>
     <th></th>
     <th></th>
     <th></th>
@@ -51,12 +51,11 @@ $result = mysqli_query( $connect, $query );
       <td align="center"><?php echo $record['id']; ?></td>
       <td align="left">
         <?php echo htmlentities( $record['title'] ); ?>
-        <small><?php echo $record['content']; ?></small>
       </td>
-      <td align="center"><?php echo $record['type']; ?></td>
-      <td align="center" style="white-space: nowrap;"><?php echo htmlentities( $record['date'] ); ?></td>
-      <td align="center"><a href="projects_photo.php?id=<?php echo $record['id']; ?>">Photo</i></a></td>
-      <td align="center"><a href="projects_edit.php?id=<?php echo $record['id']; ?>">Edit</i></a></td>
+      <td align="center"><?php echo $record['projectDescription']; ?></td>
+      <td align="center"><?php echo $record['usedSkills']; ?></td>
+      <td align="center"><a href="project_photo.php?id=<?php echo $record['id']; ?>">Photo</i></a></td>
+      <td align="center"><a href="project_edit.php?id=<?php echo $record['id']; ?>">Edit</i></a></td>
       <td align="center">
         <a href="projects.php?delete=<?php echo $record['id']; ?>" onclick="javascript:confirm('Are you sure you want to delete this project?');">Delete</i></a>
       </td>
@@ -64,7 +63,7 @@ $result = mysqli_query( $connect, $query );
   <?php endwhile; ?>
 </table>
 
-<p><a href="projects_add.php"><i class="fas fa-plus-square"></i> Add Project</a></p>
+<p><a href="project_add.php"><i class="fas fa-plus-square"></i> Add Project</a></p>
 
 
 <?php

@@ -4,9 +4,6 @@ include( 'includes/database.php' );
 include( 'includes/config.php' );
 include( 'includes/functions.php' );
 
-secure();
-
-include( 'includes/header.php' );
 
 if( !isset( $_GET['id'] ) )
 {
@@ -49,8 +46,6 @@ if( isset( $_FILES['photo'] ) )
     
   }
   
-  set_message( 'Project photo has been updated' );
-
   header( 'Location: projects.php' );
   die();
   
@@ -68,8 +63,6 @@ if( isset( $_GET['id'] ) )
       WHERE id = '.$_GET['id'].'
       LIMIT 1';
     $result = mysqli_query( $connect, $query );
-    
-    set_message( 'Project photo has been deleted' );
     
     header( 'Location: projects.php' );
     die();
@@ -94,29 +87,19 @@ if( isset( $_GET['id'] ) )
   
 }
 
+include( 'includes/header.php' );
+
 include 'includes/wideimage/WideImage.php';
 
 ?>
 
-<h2>Edit Project</h2>
+<h2>Manage project photo</h2>
 
 <p>
   Note: For best results, photos should be approximately 800 x 800 pixels.
 </p>
 
-<?php if( $record['photo'] ): ?>
 
-  <?php
-
-  $data = base64_decode( explode( ',', $record['photo'] )[1] );
-  $img = WideImage::loadFromString( $data );
-  $data = $img->resize( 200, 200, 'outside' )->crop( 'center', 'center', 200, 200 )->asString( 'jpg', 70 );
-
-  ?>
-  <p><img src="data:image/jpg;base64,<?php echo base64_encode( $data ); ?>" width="200" height="200"></p>
-  <p><a href="projects_photo.php?id=<?php echo $_GET['id']; ?>&delete"><i class="fas fa-trash-alt"></i> Delete this Photo</a></p>
-
-<?php endif; ?>
 
 <form method="post" enctype="multipart/form-data">
   
@@ -129,7 +112,7 @@ include 'includes/wideimage/WideImage.php';
   
 </form>
 
-<p><a href="projects.php"><i class="fas fa-arrow-circle-left"></i> Return to Project List</a></p>
+<p><a href="projects.php">Return to Project List</a></p>
 
 
 <?php

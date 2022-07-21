@@ -13,8 +13,8 @@ if( isset( $_POST['name'] ) )
   {
     
     $query = 'INSERT INTO social_media (
-        socialMediaName,
-        socialMediaLink
+        title,
+        link
       ) VALUES (
          "'.mysqli_real_escape_string( $connect, $_POST['name'] ).'",
          "'.mysqli_real_escape_string( $connect, $_POST['link'] ).'"

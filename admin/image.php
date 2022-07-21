@@ -41,16 +41,16 @@ switch( $_GET['type'] )
       
       break;
 
-      case 'social_media':
+      case 'social':
     
-        $query = 'SELECT socialMediaIcon 
+        $query = 'SELECT photo
           FROM social_media
           WHERE id = '.$_GET['id'].'
           LIMIT 1';
         $result = mysqli_query( $connect, $query );
         $record = mysqli_fetch_assoc( $result );
     
-        if( !$record['social_media'] ) $record['social_media'] = $camera;
+        if( !$record['photo'] ) $record['photo'] = $camera;
         
         break;
       

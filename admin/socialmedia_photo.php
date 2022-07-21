@@ -6,6 +6,8 @@ include( 'includes/functions.php' );
 
 secure();
 
+include( 'includes/header.php' );
+
 if( !isset( $_GET['id'] ) )
 {
   
@@ -38,37 +40,36 @@ if( isset( $_FILES['photo'] ) )
       }
 
       $query = 'UPDATE social_media SET
-        socialMediaIcon = "data:image/'.$type.';base64,'.base64_encode( file_get_contents( $_FILES['photo']['tmp_name'] ) ).'"
+        photo = "data:image/'.$type.';base64,'.base64_encode( file_get_contents( $_FILES['photo']['tmp_name'] ) ).'"
         WHERE id = '.$_GET['id'].'
         LIMIT 1';
-      echo $query;
       mysqli_query( $connect, $query );
 
     }
     
   }
   
-  set_message( 'Social Media photo has been updated' );
+  set_message( 'Social Media Icon has been updated' );
 
-  //header( 'Location: social_media.php' );
-  //die();
+  header( 'Location: social_media.php' );
+  die();
   
 }
 
 
-if( isset($_GET['id'] ) )
+if( isset( $_GET['id'] ) )
 {
   
   if( isset( $_GET['delete'] ) )
   {
     
     $query = 'UPDATE social_media SET
-      socialMediaIcon = ""
+      photo = ""
       WHERE id = '.$_GET['id'].'
       LIMIT 1';
     $result = mysqli_query( $connect, $query );
     
-    set_message( 'Social Media photo has been deleted' );
+    set_message( 'Social Media Icon has been deleted' );
     
     header( 'Location: social_media.php' );
     die();
@@ -77,7 +78,7 @@ if( isset($_GET['id'] ) )
   
   $query = 'SELECT *
     FROM social_media
-    WHERE socialMediaid = '.$_GET['id'].'
+    WHERE id = '.$_GET['id'].'
     LIMIT 1';
   $result = mysqli_query( $connect, $query );
   
@@ -93,7 +94,7 @@ if( isset($_GET['id'] ) )
   
 }
 
-include( 'includes/header.php' );
+include ( 'includes/header.php' );
 
 include 'includes/wideimage/WideImage.php';
 
@@ -102,19 +103,19 @@ include 'includes/wideimage/WideImage.php';
 <h2>Edit Social Media</h2>
 
 <p>
-  Note: For best results, photos should be approximately 800 x 800 pixels.
+  Note: For best results, photos should be approximately 30 x 30 pixels.
 </p>
 
-<?php if( $record['socialMediaIcon'] ): ?>
+<?php if( $record['photo'] ): ?>
 
   <?php
 
-  $data = base64_decode( explode( ',', $record['socialMediaIcon'] )[1] );
+  $data = base64_decode( explode( ',', $record['photo'] )[1] );
   $img = WideImage::loadFromString( $data );
-  $data = $img->resize( 200, 200, 'outside' )->crop( 'center', 'center', 200, 200 )->asString( 'jpg', 70 );
+  $data = $img->resize( 50, 50, 'outside' )->crop( 'center', 'center', 50, 50 )->asString( 'jpg', 70 );
 
   ?>
-  <p><img src="data:image/jpg;base64,<?php echo base64_encode( $data ); ?>" width="200" height="200"></p>
+  <p><img src="data:image/jpg;base64,<?php echo base64_encode( $data ); ?>" width="50" height="50"></p>
   <p><a href="socialmedia_photo.php?id=<?php echo $_GET['id']; ?>&delete"><i class="fas fa-trash-alt"></i> Delete this Photo</a></p>
 
 <?php endif; ?>
@@ -130,7 +131,7 @@ include 'includes/wideimage/WideImage.php';
   
 </form>
 
-<p><a href="social_media.php"><i class="fas fa-arrow-circle-left"></i> Return to Project List</a></p>
+<p><a href="social_media.php"><i class="fas fa-arrow-circle-left"></i> Return to Social Media List</a></p>
 
 
 <?php

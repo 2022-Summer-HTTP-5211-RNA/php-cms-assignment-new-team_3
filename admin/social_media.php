@@ -9,7 +9,7 @@ secure();
 if (isset($_GET['delete'])) {
 
     $query = 'DELETE FROM social_media
-    WHERE socialMediaid = ' . $_GET['delete'] . '
+    WHERE id = ' . $_GET['delete'] . '
     LIMIT 1';
     mysqli_query($connect, $query);
 
@@ -24,7 +24,7 @@ include('includes/header.php');
 
 $query = 'SELECT *
   FROM social_media
-  ORDER BY socialMediaid DESC';
+  ORDER BY id DESC';
 $result = mysqli_query($connect, $query);
 
 ?>
@@ -44,22 +44,17 @@ $result = mysqli_query($connect, $query);
         <?php while ($record = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <td align="center">
-                    <?php if ($record['socialMediaIcon'] != null){ ?>
-                    <img src="<?php echo $record['socialMediaIcon'] ?>">
-                    <p>
-                        <?php
-                        echo "photo.php?type=socialmedia&id=" . $record['socialMediaid'] . "&width=300&height=300&format=inside";
-                        } ?> </p>
+                    <img src="image.php?type=social&id=<?php echo $record['id']; ?>&width=50&height=50&format=inside">
                 </td>
-                <td align="center"><?php echo $record['socialMediaid']; ?></td>
+                <td align="center"><?php echo $record['id']; ?></td>
                 <td align="left">
-                    <?php echo htmlentities($record['socialMediaName']); ?>
+                    <?php echo htmlentities($record['title']); ?>
                 </td>
                 <td><?php echo $record['socialMediaLink']; ?>  </td>
-                <td align="center"><a href="socialmedia_photo.php?id=<?php echo $record['socialMediaid']; ?>">Photo</i></a></td>
-                <td align="center"><a href="socialmedia_edit.php?id=<?php echo $record['socialMediaid']; ?>">Edit</i></a></td>
+                <td align="center"><a href="socialmedia_photo.php?id=<?php echo $record['id']; ?>">Photo</i></a></td>
+                <td align="center"><a href="socialmedia_edit.php?id=<?php echo $record['id']; ?>">Edit</i></a></td>
                 <td align="center">
-                    <a href="social_media.php?delete=<?php echo $record['socialMediaid']; ?>"
+                    <a href="social_media.php?delete=<?php echo $record['id']; ?>"
                        onclick="javascript:confirm('Are you sure you want to delete this project?');">Delete</i></a>
                 </td>
             </tr>

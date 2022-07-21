@@ -27,13 +27,18 @@ include( 'includes/header.php' );
     </a>
   </li>
   <li>
+    <a href="employments.php">
+      Manage Employments
+    </a>
+  </li>
+  <li>
     <a href="social_media.php">
-      Manage Education
+      Manage Social Media
     </a>
   </li>
   <li>
     <a href="contacts.php">
-      Manage Education
+      Manage Contacts
     </a>
   </li>
   <li>
